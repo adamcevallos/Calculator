@@ -1,0 +1,89 @@
+html {
+    background-color: rgb(75, 75, 224);
+}
+
+/* necessary for equal to work */
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    height: 28em;
+    width: 23em;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px black;
+}
+
+#display-container {
+    overflow: auto;
+    height: 15%;
+    width: 82.5%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    position: relative;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#display{
+    overflow: hidden;
+    font-family: Helvetica;
+    position: relative;
+    font-size: 2.5em;
+    top: 16%;
+    right: 10%;
+}
+
+#button-container {
+    display: grid;
+    margin: 2em;
+    row-gap: 2px;
+    column-gap: 5px;
+    grid-template-columns: repeat(4, minmax(2em,1fr));
+    /* grid-template-areas: 
+                "allClear changeSign percent divide"
+                "seven    eight      nine    multiply"
+                "four     five       six     subtract"
+                "one      two        three   plus"
+                "zero     decimal    equal   plus";
+} */
+}
+
+button {
+    height: 4.6em; 
+    border-radius: 5px;
+
+}
+
+.operator {
+    background-color: lightgreen;
+}
+
+.number, #equal {
+    background-color: lightgray;
+}
+
+.other {
+    background-color: rgb(250, 194, 203);
+}
+
+.selected {
+    background-color: white;
+}
+
+button:hover {
+    transform: scale(1.1); 
+    transition-duration: 0.4s;
+}
+
+.number:hover, button.other:hover, #equal:hover {
+        background-color: white;
+}
