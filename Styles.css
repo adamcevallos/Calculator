@@ -48,13 +48,6 @@ html {
     row-gap: 2px;
     column-gap: 5px;
     grid-template-columns: repeat(4, minmax(2em,1fr));
-    /* grid-template-areas: 
-                "allClear changeSign percent divide"
-                "seven    eight      nine    multiply"
-                "four     five       six     subtract"
-                "one      two        three   plus"
-                "zero     decimal    equal   plus";
-} */
 }
 
 button {

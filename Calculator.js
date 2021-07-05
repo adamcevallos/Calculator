@@ -36,6 +36,26 @@ function operate(operatorName, num1, num2) {
     }
 }
 
+function roundStr(numStr) {
+    let numDecimals;
+    let num = parseFloat(numStr);
+    let decimalIndex = numStr.indexOf('.');
+    if (decimalIndex == -1) return numStr; // no rounding
+    let eIndex = numStr.indexOf('e');
+
+    if (eIndex == -1) {
+        numDecimals = numStr.split('.')[1].length + 1;
+        if (numDecimals < 4) {
+            return num.toFixed(numDecimals)
+        } else {
+            return num.toFixed(4);
+        }
+    } else {
+        splitStr = numStr.split('e');
+        return parseFloat(splitStr[0]).toFixed(4) + 'e' + splitStr[1];
+    }
+}
+
 function shorten(num) {
     numStr = String(num);
     let numDecimals;
@@ -45,7 +65,6 @@ function shorten(num) {
 }
 
 function addNumber(char) {
-    checkOverflow();
     if (!(char == '.' && input.includes('.'))) {
         if (input === '-0') {
             input = '-' + char;
@@ -59,12 +78,11 @@ function addNumber(char) {
         } else {
             input += char;
         }
-    display.textContent = input;
+    display.textContent = roundStr(input);
     operatorHighlighted = false;
     equalResultShowing = false;
     chainResultShowing = false;
     toggleSelection();
-    
     }
 }
 
@@ -72,7 +90,7 @@ function selectOperator(opChar) {
     if (chainOngoing) {
         value = operate(operator, value, input);
         input = String(value);
-        display.textContent = input;
+        display.textContent = roundStr(input);
         chainOngoing = false;
         chainResultShowing = true;
     }
@@ -117,7 +135,7 @@ function negate() {
             input = '-' + input;
         }
     }
-    display.textContent = input;
+    display.textContent = roundStr(input);
 }
 
 function backspace() {
@@ -128,18 +146,19 @@ function backspace() {
     }
     if (input === '') input = '0';
 
-    display.textContent = input;
+    display.textContent = roundStr(input);
 }
 
 function percentToWhole() {
     input = String(parseFloat(input) / 100);
-    display.textContent = input;
+    display.textContent = roundStr(input);
     if (equalResultShowing) {
         value /= 100;
     }
 }
 
 function setEqual () {
+    roundStr(input);
     if (operator) {
         if (equalResultShowing) {
             value = operate(operator, value, defaultEqualValue);
@@ -149,7 +168,7 @@ function setEqual () {
         }
 
         input = String(value);
-        display.textContent = input;
+        display.textContent = roundStr(input);
         operatorHighlighted = false;
         chainOngoing = false;
         chainResultShowing = false;
